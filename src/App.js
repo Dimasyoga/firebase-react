@@ -45,9 +45,11 @@ class App extends React.Component {
   getData() {
     const rootRef = firebase.database().ref('timestamped_measures');
     rootRef.on('value', snap => {
+      var list1 = Object.values(snap.val()['tong 1'])
+      var list2 = Object.values(snap.val()['tong 2'])
       this.setState({ 
-        chartData1: Object.values(snap.val()['tong 1']),
-        chartData2: Object.values(snap.val()['tong 2'])
+        chartData1: list1.sort((a, b) => (a.timestamp > b.timestamp) ? 1 : -1 ),
+        chartData2: list2.sort((a, b) => (a.timestamp > b.timestamp) ? 1 : -1 )
       }, () => {
         console.log("getData success")
       });
