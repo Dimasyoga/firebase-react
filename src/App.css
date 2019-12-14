@@ -36,3 +36,18 @@
     transform: rotate(360deg);
   }
 }
+
+.content{
+  width: 100%;
+  padding: 10px 5px;
+}
+
+@import url('https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css');
+
+.header {
+  width: 100%;
+  border-bottom: 1px solid black;
+  font-size: 18px;
+  text-align: center;
+  padding: 5px;
+}
