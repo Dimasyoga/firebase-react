@@ -63,7 +63,7 @@ class App extends React.Component {
 
   render(){
     return (
-      <div>
+      <div className="content">
         <div>
           <Popup
             trigger={<button class="btn"><i class="fa fa-trash"></i> Thrash 1 </button>}
@@ -71,19 +71,19 @@ class App extends React.Component {
             closeOnDocumentClick
           >
             <div className="header">Thrash 1</div>
-            <div className="content">
+            <div>
               <Charts data={this.state.chartData1} />
             </div>
           </Popup>
         </div>
         <div>
           <Popup
-            trigger={<button class="btn"><i class="fa fa-trash"></i> Thrash 2 </button>}
+            trigger={<button class="btn2"><i class="fa fa-trash"></i> Thrash 2 </button>}
             modal
             closeOnDocumentClick
           >
             <div className="header">Thrash 2</div>
-            <div className="content">
+            <div>
               <Charts data={this.state.chartData2} />
             </div>
           </Popup>
