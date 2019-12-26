@@ -5,7 +5,7 @@ import {
 
 export default function charts(props) {
   return (
-    <ResponsiveContainer width="100%" height={500}>
+    <ResponsiveContainer width="100%" height={400}>
       <AreaChart
         width={600}
         height={400}
@@ -21,15 +21,13 @@ export default function charts(props) {
           </Label>
         </XAxis>
         <YAxis type="number" domain={[0, 100]}>
-          <Label position='left' style={{ textAnchor: 'middle' }}>
-            Cap
+          <Label position='insideLeft' style={{ textAnchor: 'middle' }}>
+            Cap(%)
           </Label>
         </YAxis>
         <Tooltip />
         <Legend layout="vertical" verticalAlign="middle" align="right" />
-        <Area type="monotone" dataKey="capacity" stroke="#000000" fill="#000000" activeDot={{ r: 4 }} />
-        {/* <Area type="monotone" dataKey="uv" stroke="#82ca9d" fill="#82ca9d"/>
-        <Area type="monotone" dataKey="amt" stroke="#46ca9f" fill="#46ca9f"/> */}
+        <Area type="monotone" dataKey="capacity" stroke="#000000" fill="#7c7e80" activeDot={{ r: 4 }} />
       </AreaChart>
     </ResponsiveContainer>
   );

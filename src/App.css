@@ -1,5 +1,5 @@
 
-@import url('https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css');
+/* @import url('https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css');
 
 .header {
   width: 100%;
@@ -14,7 +14,7 @@
   margin: 0;
 }
 
-.btn {
+.btn1 {
   position: relative;
   transition: .5s ease;
   top: 55%;
@@ -22,15 +22,14 @@
   bottom: 45%;
   right: 45%;
 
-  /* background-color: rgb(102, 245, 162); */
   font-size: 15px;
   border-radius: 50%;
   padding: 10px 10px;
   border: none;
 }
 
-.btn:hover {
-  background-color: black; /* Green */
+.btn1:hover {
+  background-color: black;
   color: white;
 }
 
@@ -42,7 +41,6 @@
   bottom: 74%;
   right: 45%;
 
-  /* background-color: rgb(102, 245, 162); */
   font-size: 15px;
   border-radius: 50%;
   padding: 10px 10px;
@@ -50,6 +48,21 @@
 }
 
 .btn2:hover {
-  background-color: black; /* Green */
   color: white;
 }
+
+.modalT {
+  font-size: 12px;
+  width: 100%;
+}
+.modalT > .headerT {
+  width: 100%;
+  border-bottom: 1px solid gray;
+  font-size: 18px;
+  text-align: center;
+  padding: 5px;
+}
+.modalT > .contentT {
+  width: 100%;
+  padding: 10px 5px;
+} */
