@@ -2,6 +2,8 @@ import React from 'react'
 import Charts from '../component/Charts'
 import Table from 'react-bootstrap/Table'
 import Moment from 'moment'
+import Button from 'react-bootstrap/Button'
+import ButtonToolbar from 'react-bootstrap/ButtonToolbar'
 
 import * as firebase from 'firebase/app'
 import 'firebase/firebase-database'
@@ -11,8 +13,8 @@ class monitor0 extends React.Component {
         super(props);
         this.state = {
             chartData:[],
-            color:'#FFFFFF',
             state:[],
+            period:86400000,
         }
     }
 
@@ -32,7 +34,7 @@ class monitor0 extends React.Component {
     }
     
     myFunct(value, index, array){
-        if(value['time'] > (Date.now() - 86400000)){
+        if(value['time'] > (Date.now() - this)){
             value['time'] = Moment(value['time']).format("M/D/YYYY HH:mm")
             return value
         }
@@ -43,18 +45,6 @@ class monitor0 extends React.Component {
         return value
     }
     
-    getColor(data){
-        if(data.slice(-1)[0]['state'] === 0){
-            return '#75F735'
-        }else if(data.slice(-1)[0]['state'] === 1){
-            return '#F7EB35'
-        }else if(data.slice(-1)[0]['state'] === 2){
-            return '#F74F35'
-        }else{
-            return '#000000'
-        }
-    }
-    
     getData() {
         const rootRef = firebase.database().ref();
         // const rootRef = firebase.database();
@@ -62,13 +52,12 @@ class monitor0 extends React.Component {
             var list1 = Object.values(snap.val()['sm00']['ts'])
             list1.sort((a, b) => (a.time > b.time) ? 1 : -1 )
             // console.log("Last state: ", list1)
-            list1 = list1.filter(this.myFunct)
+            list1 = list1.filter(this.myFunct, this.state.period)
             
             if(typeof list1 != "undefined" && list1 != null && list1.length != null
             && list1.length > 0){
                 this.setState({ 
                     chartData: list1,
-                    color:this.getColor(list1),
                     state:Object.values(snap.val()['sm00']['stateUpdate']).sort((a, b) => (a.time > b.time) ? 1 : -1 ).filter(this.convertDate),
                 }, () => {
                     console.log("getData success")
@@ -83,30 +72,45 @@ class monitor0 extends React.Component {
         this.getData(theChosenOne);
     }
 
+    handleClick(Period){
+        this.setState({period:Period})
+    }
+
     render(){
         return(
             <div className="container">
                 <div className="row">
-                    <h3>SiMonster 0 Labtek 8 Lantai 4 AVRG</h3>
-                    <Charts data={this.state.chartData}/>
-                    <Table striped bordered hover>
-                        <thead>
-                            <tr>
-                            <th>State</th>
-                            <th>Time</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            {this.state.state.map(( listValue, index ) => {
-                            return (
-                                <tr key={index}>
-                                <td>{listValue.state}</td>
-                                <td>{listValue.time}</td>
+                    <h3>SiMonster 0 Labtek VIII Lt.4 (LAB AVRG)</h3>
+                </div>
+                <div className="row">
+                    <div className="row" style={{marginLeft:0}}>
+                        <ButtonToolbar>
+                            <Button variant="primary" onClick={() => this.handleClick(86400000)}>1 Hari</Button>
+                            <Button variant="primary" onClick={() => this.handleClick(604800000)}>7 Hari</Button>
+                            <Button variant="primary" onClick={() => this.handleClick(2592000000)}>30 Hari</Button>
+                        </ButtonToolbar>
+                    </div>
+                    <div className="row" style={{marginTop:20}}>
+                        <Charts data={this.state.chartData}/>
+                        <Table striped bordered hover>
+                            <thead>
+                                <tr>
+                                <th>State</th>
+                                <th>Time</th>
                                 </tr>
-                            );
-                            })}
-                        </tbody>
-                    </Table>
+                            </thead>
+                            <tbody>
+                                {this.state.state.map(( listValue, index ) => {
+                                return (
+                                    <tr key={index}>
+                                    <td>{listValue.state}</td>
+                                    <td>{listValue.time}</td>
+                                    </tr>
+                                );
+                                })}
+                            </tbody>
+                        </Table>
+                    </div>
                 </div>
             </div>
         );

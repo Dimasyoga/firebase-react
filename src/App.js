@@ -6,7 +6,6 @@ import {
   HashRouter,
 } from "react-router-dom";
 import labtek8 from './view/labtek8'
-import './App.css'
 
 class App extends React.Component {
   render(){
