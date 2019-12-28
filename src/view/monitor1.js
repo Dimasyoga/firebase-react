@@ -2,11 +2,14 @@ import React from 'react'
 import Charts from '../component/Charts'
 import Table from 'react-bootstrap/Table'
 import Moment from 'moment'
+import 'moment/locale/id'
 import Button from 'react-bootstrap/Button'
 import ButtonToolbar from 'react-bootstrap/ButtonToolbar'
 
 import * as firebase from 'firebase/app'
 import 'firebase/firebase-database'
+
+Moment.locale('id')
 
 class monitor1 extends React.Component {
     constructor(props) {
@@ -14,7 +17,7 @@ class monitor1 extends React.Component {
         this.state = {
             chartData:[],
             state:[],
-            period:86400000,
+            period:604800000,
         }
     }
 
@@ -35,13 +38,13 @@ class monitor1 extends React.Component {
     
     myFunct(value, index, array){
         if(value['time'] > (Date.now() - this)){
-            value['time'] = Moment(value['time']).format("M/D/YYYY HH:mm")
+            value['time'] = Moment(value['time']).format('ddd D-MMM-YYYY HH:mm')
             return value
         }
     }
     
     convertDate(value, index, array){  
-        value['time'] = Moment(value['time']).format("M/D/YYYY HH:mm")
+        value['time'] = Moment(value['time']).format('dddd D-MMM-YYYY HH:mm')
         return value
     }
     
@@ -72,25 +75,27 @@ class monitor1 extends React.Component {
         this.getData(theChosenOne);
     }
 
-    handleClick(Period){
-        this.setState({period:Period})
+    handleClick(inp){
+        this.setState({period:inp}, () => {
+            this.getData()
+        })
     }
 
     render(){
         return(
             <div className="container">
                 <div className="row">
-                    <h3>SiMonster 1 Labtek VIII Lt.4 (Depan Lift)</h3>
+                    <h3>SiMonster 1 Labtek VIII Lt.3 (Depan Lift)</h3>
                 </div>
                 <div className="row">
                     <div className="row" style={{marginLeft:0}}>
                         <ButtonToolbar>
-                            <Button variant="primary" onClick={() => this.handleClick(86400000)}>1 Hari</Button>
-                            <Button variant="primary" onClick={() => this.handleClick(604800000)}>7 Hari</Button>
+                            <Button variant="danger" onClick={() => this.handleClick(86400000)}>1 Hari</Button>
+                            <Button variant="success" onClick={() => this.handleClick(604800000)}>7 Hari</Button>
                             <Button variant="primary" onClick={() => this.handleClick(2592000000)}>30 Hari</Button>
                         </ButtonToolbar>
                     </div>
-                    <div className="row" style={{marginTop:20}}>
+                    <div className="row" style={{marginTop:20, marginLeft:0}}>
                         <Charts data={this.state.chartData}/>
                         <Table striped bordered hover>
                             <thead>

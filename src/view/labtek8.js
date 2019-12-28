@@ -40,12 +40,16 @@ class labtek8 extends React.Component {
     }
 
     getColor(data){
-        if(data.slice(-1)[0]['state'] === 0){
-            return "success"
-        }else if(data.slice(-1)[0]['state'] === 1){
-            return "warning"
-        }else if(data.slice(-1)[0]['state'] === 2){
-            return "danger"
+        if(data.slice(-1)[0]['time'] > (Date.now()-7200000)){
+            if(data.slice(-1)[0]['state'] === 0){
+                return "success"
+            }else if(data.slice(-1)[0]['state'] === 1){
+                return "warning"
+            }else if(data.slice(-1)[0]['state'] === 2){
+                return "danger"
+            }else{
+                return "light"
+            }
         }else{
             return "dark"
         }
@@ -89,10 +93,10 @@ class labtek8 extends React.Component {
             <HashRouter>
                 <div className="row">
                     <ButtonToolbar>
-                        <LinkContainer to="/labtek8/simonster0">
+                        <LinkContainer to="/labtek8/simonster0/monitor">
                             <Button variant={this.state.color0} >SiMonster 0</Button>
                         </LinkContainer>
-                        <LinkContainer to="/labtek8/simonster1">
+                        <LinkContainer to="/labtek8/simonster1/monitor">
                             <Button variant={this.state.color1} >SiMonster 1</Button>
                         </LinkContainer>
                         <LinkContainer to="/labtek8/simonster2">

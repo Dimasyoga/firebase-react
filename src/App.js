@@ -4,6 +4,7 @@ import { LinkContainer } from 'react-router-bootstrap'
 import {
   Route,
   HashRouter,
+  Redirect
 } from "react-router-dom";
 import labtek8 from './view/labtek8'
 
@@ -28,6 +29,20 @@ class App extends React.Component {
                     <Button variant="outline-primary">Labtek 7</Button>
                   </LinkContainer>
                 </div>
+                <div className="column" style={{marginTop:20}}>
+                  <div className="row" style={{marginBottom:15, marginLeft:10}}>
+                    <div style={{backgroundColor:"green", height:25, width:25, marginRight:20}} ></div>
+                    <font size="3">Kosong</font>
+                  </div>
+                  <div className="row" style={{marginBottom:10, marginLeft:10}}>
+                    <div style={{backgroundColor:"yellow", height:25, width:25, marginRight:20, marginTop:10}} ></div>
+                    <font size="3">Setengah<br/>Penuh</font>
+                  </div>
+                  <div className="row" style={{marginBottom:10, marginLeft:10}}>
+                    <div style={{backgroundColor:"red", height:25, width:25, marginRight:20}} ></div>
+                    <font size="3">Penuh</font>
+                  </div>
+                </div>
               </div>
               <div className="col-8" style={{marginLeft:20}}>
                 <Route path="/labtek8" component={labtek8}/>
@@ -38,6 +53,7 @@ class App extends React.Component {
             </div>
           </div>
         </div>
+        <Redirect to="/labtek8/simonster0/monitor"/>
       </HashRouter> 
     );
   }

@@ -2,6 +2,10 @@ import React from 'react'
 import {
   AreaChart, Area, XAxis, YAxis, CartesianGrid, Tooltip, Legend, ResponsiveContainer, Label
 } from 'recharts';
+import Moment from 'moment'
+import 'moment/locale/id'
+
+Moment.locale('id')
 
 export default function charts(props) {
   return (
@@ -15,7 +19,9 @@ export default function charts(props) {
         }}
       >
         <CartesianGrid strokeDasharray="1 1" vertical={false}/>
-        <XAxis type="category" dataKey="time">
+        <XAxis type="category" dataKey="time" tickFormatter={function(value, name) {
+                return Moment(Moment(value, "ddd D-MMM-YYYY HH:mm").valueOf()).format('D-MMM')
+              }}>
           <Label position='bottom' style={{ textAnchor: 'middle' }}>
             Time
           </Label>
